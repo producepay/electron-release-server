@@ -11,13 +11,13 @@ var fsx = require('fs-extra');
 var crypto = require('crypto');
 var Promise = require('bluebird');
 
-var SkipperDisk = require('skipper-disk');
+var SkipperS3 = require('skipper-s3');
 
 var AssetService = {};
 
 AssetService.serveFile = function(req, res, asset) {
   // Stream the file to the user
-  var fileStream = fsx.createReadStream(asset.fd)
+  SkipperS3(sails.config.files).read(fd)
     .on('error', function(err) {
       res.serverError('An error occurred while accessing asset.', err);
       sails.log.error('Unable to access asset:', asset.fd);
@@ -78,7 +78,7 @@ AssetService.getHash = function(fd, type = 'sha1') {
     var hash = crypto.createHash(type);
     hash.setEncoding('hex');
 
-    var fileStream = fsx.createReadStream(fd)
+    SkipperS3(sails.config.files).read(fd)
       .on('error', function(err) {
         reject(err);
       })
@@ -135,7 +135,7 @@ AssetService.deleteFile = function(asset) {
     throw new Error('The provided asset does not have a file descriptor');
   }
 
-  var fileAdapter = SkipperDisk();
+  var fileAdapter = SkipperS3(sails.config.files);
   var fileAdapterRmAsync = Promise.promisify(fileAdapter.rm);
 
   return fileAdapterRmAsync(asset.fd);
