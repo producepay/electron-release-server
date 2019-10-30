@@ -36,6 +36,10 @@
   padding-top: 20px;
 }
 
+.hide {
+  display: none;
+}
+
 // Input status colours
 .form-control,
 input,
@@ -89,12 +93,10 @@ textarea {
   margin: 0.2em 0;
   padding: 0.2em 0;
 }
-// Custom page footer
-.footer {
-  border-top: 1px solid #333;
-  color: #777;
-  margin: 30px 0;
-  padding-top: 10px;
+.download-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 // Panel header button
 .modal-header-button {
