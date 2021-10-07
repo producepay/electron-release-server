@@ -1,0 +1,12 @@
+{
+  "defaultEnv": "production",
+
+  "production": {
+    "overwrite": {
+        "driver": "pg",
+        "ssl": {
+          "rejectUnauthorized": false
+        }
+      }
+  }
+}
